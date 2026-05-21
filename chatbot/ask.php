@@ -6,11 +6,24 @@ if(!$conn){
     die("Database Connection Failed");
 }
 
-$message = strtolower($_POST['message']);
+$message = strtolower(trim($_POST['message']));
+
+
+
+// GREETING
+if(
+    $message == "hi" ||
+    $message == "hello" ||
+    $message == "hey"
+)
+{
+    echo "Hello! Welcome to Get Hotels 😊";
+}
+
 
 
 // CONTACT NUMBER
-if(
+else if(
     strpos($message, "contact") !== false ||
     strpos($message, "phone") !== false ||
     strpos($message, "number") !== false
@@ -156,6 +169,27 @@ else if(
     {
         echo $row['name']." : ₹".$row['price']."<br>";
     }
+}
+
+
+
+// BOOKING
+else if(
+    strpos($message, "booking") !== false ||
+    strpos($message, "book") !== false
+)
+{
+    echo "You can book rooms directly from our Rooms page 😊";
+}
+
+
+
+// THANK YOU
+else if(
+    strpos($message, "thank") !== false
+)
+{
+    echo "You're welcome 😊";
 }
 
 
