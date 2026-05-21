@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hotel AI Assistant</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            padding: 15px;
+        }
+
+        #response {
+            margin-top: 20px;
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        input {
+            width: 70%;
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Hotel AI Assistant</h1>
+
+    <input type="text" id="message" placeholder="Ask something">
+
+    <button onclick="sendMessage()">Send</button>
+
+    <div id="response"></div>
+
+    <script>
+
+        async function sendMessage() {
+            let message = document.getElementById("message").value;
+
+            let formData = new FormData();
+
+            formData.append("message", message);
+
+            let response = await fetch("http://localhost/hotelbooking/chatbot/ask.php",
+                {
+                    method: "POST",
+                    body: formData
+                });
+
+            let data = await response.text();
+
+            document.getElementById("response").innerHTML = data;
+        }
+
+    </script>
+
+</body>
+
+</html>
